@@ -24,4 +24,6 @@ if connection:
         cursor.close() ["def stream_users()"] 
          ["def stream_users_in_batches"]
          ["def batch_processing", "25", ">"]
-         ["yield", "return"]  '''
+         ["yield", "return"]  
+          ["def paginate_users", "OFFSET"]
+         ["paginate_users(page_size, offset)"] '''
