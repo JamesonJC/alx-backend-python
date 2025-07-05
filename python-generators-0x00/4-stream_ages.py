@@ -26,4 +26,6 @@ if connection:
          ["def batch_processing", "25", ">"]
          ["yield", "return"]  
           ["def paginate_users", "OFFSET"]
-         ["paginate_users(page_size, offset)"] '''
+         ["paginate_users(page_size, offset)"]
+         ["def stream_user_ages()"]
+         ["+"] '''
