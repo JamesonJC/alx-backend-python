@@ -21,4 +21,7 @@ if connection:
         cursor.execute(f"SELECT * FROM user_data LIMIT 5;")
         rows = cursor.fetchall()
         print(rows)
-        cursor.close() ["def stream_users()"] '''
+        cursor.close() ["def stream_users()"] 
+         ["def stream_users_in_batches"]
+         ["def batch_processing", "25", ">"]
+         ["yield", "return"]  '''
