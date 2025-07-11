@@ -1,7 +1,7 @@
 
 import sqlite3
 import functools
-#import _datetime
+#from datetime import datetime
 
 #### decorator to log SQL queries ####
 
