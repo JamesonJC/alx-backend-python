@@ -7,11 +7,15 @@ def with_db_connection(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         conn = sqlite3.connect('users.db')
-        try:
-            result = func(conn, *args, **kwargs)
-        finally:
-            conn.close()
-        return result
+        #try:
+        results = func(conn, *args, **kwargs)
+        #finally:
+        conn.close()
+        # if conn.close:
+        #     print("Database connection closed.")
+        # else:
+        #     print("Database connection was not closed properly.")
+        return results
     return wrapper
 
 @with_db_connection 
