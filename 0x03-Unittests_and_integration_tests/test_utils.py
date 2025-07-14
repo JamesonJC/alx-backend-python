@@ -24,11 +24,6 @@ class TestAccessNestedMap(unittest.TestCase):
         (nested_map := {"a": {"b": 2}}, path := ("a", "b"), expected := 2),
     ])
     def test_access_nested_map(self, nested_map, path, expected):
-            # self,
-            # nested_map: '''Dict''',
-            # path: '''Tuple[str]''',
-            # expected: '''Union[Dict, int]''',
-            # ):'''-> None:'''
         """Tests `access_nested_map`'s output."""
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
@@ -37,11 +32,6 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": 1}, ("a", "b"), KeyError),
     ])
     def test_access_nested_map_exception(self, nested_map, path, exception):
-            # self,
-            # nested_map: Dict,
-            # path: Tuple[str],
-            # exception: Exception,
-            # ) -> None:
         """Tests `access_nested_map`'s exception raising."""
         with self.assertRaises(exception):
             access_nested_map(nested_map, path)
