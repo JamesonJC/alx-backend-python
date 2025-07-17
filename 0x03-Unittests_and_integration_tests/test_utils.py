@@ -3,11 +3,11 @@
 A module for testing the utils module.
 """
 import unittest
-#from typing import Dict, Tuple, Union
-#from unittest.mock import patch, Mock
+from typing import Dict, Tuple, Union
+from unittest.mock import patch, Mock
 from parameterized import parameterized
 
-from utils import access_nested_map #(
+from utils import * #(
     #access_nested_map,
     #get_json,
     #memoize,
@@ -37,7 +37,7 @@ class TestAccessNestedMap(unittest.TestCase):
             access_nested_map(nested_map, path)
 
 
-'''class TestGetJson(unittest.TestCase):
+class TestGetJson(unittest.TestCase):
     """Tests the `get_json` function."""
     @parameterized.expand([
         ("http://example.com", {"payload": True}),
@@ -54,7 +54,7 @@ class TestAccessNestedMap(unittest.TestCase):
             self.assertEqual(get_json(test_url), test_payload)
             req_get.assert_called_once_with(test_url)
 
-
+'''
 class TestMemoize(unittest.TestCase):
     """Tests the `memoize` function."""
     def test_memoize(self) -> None:
