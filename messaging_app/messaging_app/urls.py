@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('chats.urls')),  # This adds the /api/messages/ endpoint
 ]
+# ["api-auth"]
 
