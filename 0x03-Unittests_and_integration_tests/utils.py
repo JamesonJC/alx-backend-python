@@ -17,7 +17,6 @@ __all__ = [
     "memoize",
 ]
 
-
 def access_nested_map(nested_map: Mapping, path: Sequence) -> Any:
     """Access nested map with key path.
     Parameters

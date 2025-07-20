@@ -3,14 +3,14 @@
 A module for testing the utils module.
 """
 import unittest
-#from typing import Dict, Tuple, Union
-#from unittest.mock import patch, Mock
+from typing import Dict, Tuple, Union
+from unittest.mock import patch, Mock
 from parameterized import parameterized
 
 from utils import (
     access_nested_map,
-    #get_json,
-    #memoize,
+    get_json,
+    memoize,
 )
 
 
@@ -27,7 +27,7 @@ class TestAccessNestedMap(unittest.TestCase):
         """Tests `access_nested_map`'s output."""
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
-    '''@parameterized.expand([
+    @parameterized.expand([
         ({}, ("a",), KeyError),
         ({"a": 1}, ("a", "b"), KeyError),
     ])
@@ -73,4 +73,5 @@ class TestMemoize(unittest.TestCase):
             test_class = TestClass()
             self.assertEqual(test_class.a_property(), 42)
             self.assertEqual(test_class.a_property(), 42)
-            memo_fxn.assert_called_once()'''
+            memo_fxn.assert_called_once()
+
