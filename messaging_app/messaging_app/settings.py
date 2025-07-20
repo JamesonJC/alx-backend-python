@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "chats",
 ]
 
 REST_FRAMEWORK = {
@@ -108,6 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# use custom user model
+AUTH_USER_MODEL = "chats.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
