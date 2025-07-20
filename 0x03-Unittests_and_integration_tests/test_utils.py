@@ -17,8 +17,6 @@ from utils import (
 class TestAccessNestedMap(unittest.TestCase):
     """Tests the `access_nested_map` function."""
 
-    """Decorator that lets us run the test with different inputs and expected outputs."""
-
     @parameterized.expand(
         [
             ({"a": 1}, ("a",), 1),
