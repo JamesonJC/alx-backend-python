@@ -1,17 +1,6 @@
 # messaging_app/chats/permissions.py
 from rest_framework import permissions
-from .models import Conversation, Message
-
-class IsOwnerOrReadOnly(permissions.BasePermission):
-    """
-    Custom permission to only allow users to view or edit their own messages.
-    """
-
-    def has_object_permission(self, request, view, obj):
-        # Check if the request is read-only or if the user is the owner of the object
-        if request.method in permissions.SAFE_METHODS:
-            return True
-        return obj.user == request.user  # Assuming `user` is a field on your message model
+from .models import Message
 
 class IsParticipantOfConversation(permissions.BasePermission):
     """
@@ -20,25 +9,30 @@ class IsParticipantOfConversation(permissions.BasePermission):
 
     def has_permission(self, request, view):
         """
-        This method will be used for the general permission checks for the view.
-        Here we check if the user is authenticated.
+        This method checks if the user is authenticated.
         """
         # Ensure the user is authenticated
         return request.user and request.user.is_authenticated
 
     def has_object_permission(self, request, view, obj):
         """
-        This method will be used for the object-level permission checks.
-        Here we check if the user is a participant in the conversation related to the message.
+        This method checks if the user is a participant in the conversation related to the message.
+        It handles various HTTP methods like GET, PUT, PATCH, DELETE.
         """
+        # Get the conversation object from the message
         if isinstance(obj, Message):
-            # Check if the user is part of the conversation related to the message
             conversation = obj.conversation  # Assuming each message has a related conversation
-            if request.method in permissions.SAFE_METHODS:
-                # Allow read-only methods (GET, HEAD, OPTIONS)
-                return conversation.participants.filter(id=request.user.id).exists()
 
-            # For modifying or deleting messages, ensure the user is a participant
-            return conversation.participants.filter(id=request.user.id).exists()
+            # Check if the user is a participant of the conversation
+            is_participant = conversation.participants.filter(id=request.user.id).exists()
+
+            # Allow only GET requests (viewing messages)
+            if request.method in permissions.SAFE_METHODS:
+                return is_participant
+
+            # Allow PUT, PATCH, DELETE only if the user is a participant
+            if request.method in ['PUT', 'PATCH', 'DELETE']:
+                return is_participant
 
         return False
+    
