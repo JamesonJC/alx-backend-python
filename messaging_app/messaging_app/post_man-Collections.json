@@ -1,0 +1,214 @@
+{
+  "info": {
+    "_postman_id": "f1b77c87-8b0c-4d52-a544-d6fc5f2b0606",
+    "name": "Messaging API Test Collection",
+    "description": "Test the Messaging API endpoints including authentication, creating conversations, sending messages, fetching conversations, and handling unauthorized access."
+  },
+  "item": [
+    {
+      "name": "JWT Authentication",
+      "item": [
+        {
+          "name": "Login (JWT Token)",
+          "request": {
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/token/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "token"
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"user1\",\n  \"password\": \"password123\"\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Conversations",
+      "item": [
+        {
+          "name": "Create Conversation",
+          "request": {
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/conversations/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "conversations"
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "description": "JWT Token"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Conversation with John\",\n  \"participants\": [1, 2]\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Fetch Conversations",
+          "request": {
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/conversations/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "conversations"
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "description": "JWT Token"
+              }
+            ]
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Messages",
+      "item": [
+        {
+          "name": "Send Message",
+          "request": {
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/conversations/1/messages/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "conversations",
+                "1",
+                "messages"
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "description": "JWT Token"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Hello, John! How are you?\",\n  \"conversation\": 1\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Fetch Messages in Conversation",
+          "request": {
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/conversations/1/messages/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "conversations",
+                "1",
+                "messages"
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "description": "JWT Token"
+              }
+            ]
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Unauthorized Access",
+      "item": [
+        {
+          "name": "Unauthorized Access Test",
+          "request": {
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/conversations/1/messages/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "conversations",
+                "1",
+                "messages"
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Unauthorized message attempt.\",\n  \"conversation\": 1\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
