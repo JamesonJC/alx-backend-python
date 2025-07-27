@@ -31,9 +31,14 @@ class IsParticipantOfConversation(permissions.BasePermission):
         This method will be used for the object-level permission checks.
         Here we check if the user is a participant in the conversation related to the message.
         """
-        # If the object is a message, check if the user is part of the conversation
         if isinstance(obj, Message):
+            # Check if the user is part of the conversation related to the message
             conversation = obj.conversation  # Assuming each message has a related conversation
-            return conversation.participants.filter(id=request.user.id).exists()  # Check if the user is in the conversation
+            if request.method in permissions.SAFE_METHODS:
+                # Allow read-only methods (GET, HEAD, OPTIONS)
+                return conversation.participants.filter(id=request.user.id).exists()
+
+            # For modifying or deleting messages, ensure the user is a participant
+            return conversation.participants.filter(id=request.user.id).exists()
 
         return False
