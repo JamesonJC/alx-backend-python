@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "chats"
-    'rest_framework_simplejwt',
+    'rest_framework_simplejwt'
+    'django_filters',
 ]
 # ["rest_framework.authentication.BasicAuthentication"]
 REST_FRAMEWORK = {
@@ -50,6 +51,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',  # Default pagination class
+    'PAGE_SIZE': 20,  # Number of items per page
 }
 
 # JWT settings (optional but recommended)
