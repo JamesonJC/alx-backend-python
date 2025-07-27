@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "chats"
     'rest_framework_simplejwt',
 ]
-
+# ["rest_framework.authentication.BasicAuthentication"]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
