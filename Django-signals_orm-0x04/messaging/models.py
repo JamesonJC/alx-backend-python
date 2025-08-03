@@ -19,6 +19,8 @@ class Message(models.Model):
         on_delete=models.CASCADE
     )
     read = models.BooleanField(default=False)
+    objects = models.Manager()
+    unread = UnreadMessagesManager()
 
     def __str__(self):
         return f"{self.sender.username} → {self.receiver.username}: {self.content[:30]}"
@@ -34,3 +36,6 @@ class MessageHistory(models.Model):
     old_content = models.TextField()
     edited_at = models.DateTimeField(auto_now_add=True)
 
+class UnreadMessagesManager(models.Manager):
+    def for_user(self, user):
+        return self.get_queryset().filter(receiver=user, read=False).only('content', 'timestamp')

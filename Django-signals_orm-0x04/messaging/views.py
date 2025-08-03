@@ -7,6 +7,7 @@ from django.views.generic import ListView
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.contrib.auth import logout
+from messaging.models import Message
 
 from .models import Message
 
@@ -36,3 +37,14 @@ class ConversationView(ListView):
             receiver=self.request.user
         ).sele
 #["user.delete()", "delete_user"]ct_related('sender').order_by('-timestamp') ["select_related"]
+
+
+@method_decorator(cache_page(60), name='dispatch')
+class MessageListView(ListView):
+    model = Message
+    template_name = 'chat/message_list.html'
+    context_object_name = 'messages'
+
+    def get_queryset(self):
+        user = self.request.user
+        return Message.objects.filter(receiver=user).select_related('sender')
