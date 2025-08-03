@@ -48,3 +48,4 @@ class MessageListView(ListView):
     def get_queryset(self):
         user = self.request.user
         return Message.objects.filter(receiver=user).select_related('sender')
+#["Message.unread.unread_for_user"] [".only"]
