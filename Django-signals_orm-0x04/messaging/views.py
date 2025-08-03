@@ -6,9 +6,9 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django.contrib.auth import logout
 
 from .models import Message
-
 
 @login_required
 def send_message(request, receiver_id):
@@ -21,19 +21,17 @@ def send_message(request, receiver_id):
             receiver=receiver,
             content=content
         )
-        return redirect('inbox')
+        return redirect('inbox')  # Adjust as needed
 
     return render(request, 'messaging/send_message.html', {'receiver_id': receiver_id})
-
 
 @method_decorator(cache_page(60), name='dispatch')
 class ConversationView(ListView):
     model = Message
-    template_name = 'messaging/conversation.html' 
+    template_name = 'messaging/conversation.html'
     context_object_name = 'messages'
 
     def get_queryset(self):
-        # Get all messages sent to the logged-in user with related user data
         return Message.objects.filter(
             receiver=self.request.user
-        ).select_related('sender', 'receiver').order_by('-timestamp')
+        ).sele
