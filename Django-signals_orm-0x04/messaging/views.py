@@ -35,3 +35,4 @@ class ConversationView(ListView):
         return Message.objects.filter(
             receiver=self.request.user
         ).sele
+#["user.delete()", "delete_user"]ct_related('sender').order_by('-timestamp')
