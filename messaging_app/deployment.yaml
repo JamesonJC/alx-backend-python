@@ -1,19 +1,19 @@
-apiversion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
-Metadat: 
-name: messaging-app
+metadata: 
+  name: messaging-app
 spec:
   replicas: 1
   selector:
-    metchLabels:
+    matchLabels:
       app: messaging
   template:
-    metedata:
+    metadata:
       labels:
         app: messaging 
     spec:
       containers:
-        - name: meassaging-conatiner
-          image: messaging-app
+        - name: meassaging-container
+          image: messaging_app
           ports:
             - containerPort: 8000
