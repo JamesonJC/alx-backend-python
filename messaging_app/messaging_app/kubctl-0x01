@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Script to scale Django app deployment and test perfomance
+
+# Step 1: Scale to 3 replicas
+echo "Scaling deployment to 3 replicas..."
+kubectl scale deployment messaging-app --replicas=3
+
+# Wait for pods to be up
+echo "Waiting for pods to be ready..."
+sleep 15
+
+# Step 2: Show running pods
+echo "Current running pods"
+kubectl get pods
+
+# Step 3: Load test using wrk
+echo "Starting load test with wrk..."
+# Get Minikube IP
+APP_AP=$(minikube ip)
+# Run wrk if available, else prompt install
+if command -v wrk &> /dev/null
+then
+    wrk -t4 -c100 -d15s http://$APP_AP:8000/
+else
+    echo "wrk is not installed. Please install it to run the loas test"
+fi
+
+# Step 4: Show resource usage
+echo "Fetching resource usage..."
+kubectl top pods
