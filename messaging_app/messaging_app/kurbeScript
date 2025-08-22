@@ -14,7 +14,7 @@ echo "Minikube is installed."
 echo "Starting Minikube cluster..."
 minikube start
 
-if [ $? -ne 0]; then
+if [ $? -ne 0 ]; then
     echo "Failed to start Minikube"
     exit 1
 fi
@@ -23,7 +23,7 @@ echo "Minikube Started"
 echo "Verifying Kubernetes cluster..."
 kubectl cluster-info
 
-if [ $? -ne 0]; then
+if [ $? -ne 0 ]; then
     echo "Kubectl could not connect to the cluster"
     exit 1
 fi

@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt import views as jwt_views
 from rest_framework.routers import DefaultRouter
-from messaging_app.views import MessageViewSet, ConversationViewSet
+from chats.views import MessageViewSet, ConversationViewSet
 
 router = DefaultRouter()
 router.register(r'conversations', ConversationViewSet)
@@ -31,7 +31,7 @@ urlpatterns = [
     path('api/', include('chats.urls')),  # This adds the /api/messages/ endpoint
     # JWT authentication URLs
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', jwt_views.TokenRefreshVi0ew.as_view(), name='token_refresh'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include(router.urls)),
 ]
 # ["api-auth"]
